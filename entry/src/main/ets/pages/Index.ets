@@ -1,6 +1,6 @@
-import {AccountBookPage} from './account_book_page';
-import {AccountMainPage} from './account_main_page';
-import {AccountDetailPage} from './account_detail_page';
+import { AccountBookPage } from './account_book_page';
+import { AccountMainPage } from './account_main_page';
+import { AccountDetailPage } from './account_detail_page';
 
 @Entry
 @Component
@@ -11,17 +11,20 @@ struct Index {
   build() {
     Column() {
       Column() {
-        this.ContentCurrentPage(this.currentIndex)
+        this.ContentCurrentPage()
       }.height('90%')
-      Row({space:20}) {
+
+      Row({ space: 20 }) {
         ForEach(this.tabItems, (item: string, index: number) => {
           Column() {
-              Image(this.getTabIconResource(index))
-                .width(20).height(20).margin({top: 5})
-                .objectFit(ImageFit.Contain)
-                .fillColor(this.currentIndex === index ? Color.Blue : Color.Black)
-              Text(item).fontSize(12).margin({top: 3})
-                .fontColor(this.currentIndex === index ? Color.Blue : Color.Black)
+            Image(this.getTabIconResource(index))
+              .width(20)
+              .height(20)
+              .margin({ top: 5 })
+              .objectFit(ImageFit.Contain)
+              .fillColor(this.currentIndex === index ? Color.Blue : Color.Black)
+            Text(item).fontSize(12).margin({ top: 3 })
+              .fontColor(this.currentIndex === index ? Color.Blue : Color.Black)
           }
           .onClick(() => {
             this.currentIndex = index
@@ -45,12 +48,12 @@ struct Index {
   }
 
   @Builder
-  private ContentCurrentPage(index: number) {
-    if (index === 0) {
+  private ContentCurrentPage() {
+    if (this.currentIndex === 0) {
       AccountMainPage()
-    } else if (index === 1) {
+    } else if (this.currentIndex === 1) {
       AccountBookPage()
-    } else if (index === 2) {
+    } else if (this.currentIndex === 2) {
       AccountDetailPage()
     }
   }
@@ -62,5 +65,4 @@ struct Index {
       Text(text).fontSize(14)
     }
   }
-
 }
